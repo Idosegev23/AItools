@@ -1,10 +1,11 @@
 // src/components/AItoolsPage.js
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import logo from '../assets/logo11.png'; // נתיב ללוגו
+import { FaWhatsapp, FaPhone } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
+import logo from '../assets/logo11.png';
 import 'tailwindcss/tailwind.css';
 
-// רשימת כלי AI
 const aiTools = [
   { category: 'תמונות / ליפסינק', name: 'Artflow', usage: 'יצירת תמונות, אימון מודל על תמונות שלנו, ליפסינק לאוואטרים, יצירת סרטונים', link: 'https://artflow.ai', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
   { category: 'מודל שפה גדול', name: 'ChatGPT', usage: 'מענה על שאלות בכל הנושאים, יכולת ליצור ולערוך תמונות', link: 'https://chat.openai.com', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
@@ -58,17 +59,95 @@ const aiTools = [
   { category: 'חיפוש מידע', name: 'Gitbook Lens', usage: '', link: 'https://docs.gitbook.com/content-editor/searching-your-content/gitbook-ai', price: 'חינם', difficulty: 'מתקדמים' },
   { category: 'מידול קולי', name: 'רובו-שאול', usage: '', link: 'https://github.com/maxmelichov/Text-To-speech', price: 'חינם', difficulty: 'מתקדמים' },
   { category: 'מודל של שפה', name: 'Groq', usage: '', link: 'https://groq.com', price: 'חינם', difficulty: 'מתחילים' },
-  { category: 'תמלול ויצירת כתוביות', name: 'Captions', usage: '', link: 'https://www.captions.ai', price: 'בתשלום', difficulty: 'מתחילים' },
-  { category: 'תמלול ויצירת כתוביות / עריכת וידאו', name: 'Kapwing', usage: '', link: 'https://www.kapwing.com', price: 'חינם / בתשלום', difficulty: 'מתקדמים' },
-  { category: 'וידאו', name: 'CapCut', usage: '', link: 'https://www.capcut.com', price: 'חינם', difficulty: 'מתחילים' },
-  { category: 'כתיבת קוד', name: 'Github Co-Pilot', usage: '', link: 'https://github.com/features/copilot', price: 'חינם', difficulty: 'מתקדמים' },
-  { category: 'פיתוח', name: 'Devin', usage: '', link: 'https://preview.devin.ai', price: 'חינם', difficulty: 'מתחילים' },
-  { category: 'מחקר', name: 'Perplexity', usage: '', link: 'https://www.perplexity.ai', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
-  { category: 'מודל שפה גדול', name: 'Microsoft Co-Pilot', usage: '', link: 'https://copilot.microsoft.com', price: 'חינם', difficulty: 'מתחילים' },
-  { category: 'מצגות / דוחות / מאמרים', name: 'Office Co-Pilot', usage: '', link: 'https://copilot.cloud.microsoft/en-us/prompts', price: 'בתשלום', difficulty: 'מתחילים' },
-  { category: 'מצגות / דוחות / מאמרים', name: 'gamma.app', usage: 'יצירת מצגות ודוחות אוטומטית', link: 'https://gamma.app', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
-  { category: 'ניתוח נתונים', name: 'Julius AI', usage: '', link: 'https://julius.ai', price: 'חינם / בתשלום', difficulty: 'מתחילים' }
+{ category: 'תמלול ויצירת כתוביות', name: 'Captions', usage: '', link: 'https://www.captions.ai', price: 'בתשלום', difficulty: 'מתחילים' },
+{ category: 'תמלול ויצירת כתוביות / עריכת וידאו', name: 'Kapwing', usage: '', link: 'https://www.kapwing.com', price: 'חינם / בתשלום', difficulty: 'מתקדמים' },
+{ category: 'וידאו', name: 'CapCut', usage: '', link: 'https://www.capcut.com', price: 'חינם', difficulty: 'מתחילים' },
+{ category: 'כתיבת קוד', name: 'Github Co-Pilot', usage: '', link: 'https://github.com/features/copilot', price: 'חינם', difficulty: 'מתקדמים' },
+{ category: 'פיתוח', name: 'Devin', usage: '', link: 'https://preview.devin.ai', price: 'חינם', difficulty: 'מתחילים' },
+{ category: 'מחקר', name: 'Perplexity', usage: '', link: 'https://www.perplexity.ai', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
+{ category: 'מודל שפה גדול', name: 'Microsoft Co-Pilot', usage: '', link: 'https://copilot.microsoft.com', price: 'חינם', difficulty: 'מתחילים' },
+{ category: 'מצגות / דוחות / מאמרים', name: 'Office Co-Pilot', usage: '', link: 'https://copilot.cloud.microsoft/en-us/prompts', price: 'בתשלום', difficulty: 'מתחילים' },
+{ category: 'מצגות / דוחות / מאמרים', name: 'gamma.app', usage: 'יצירת מצגות ודוחות אוטומטית', link: 'https://gamma.app', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
+{ category: 'ניתוח נתונים', name: 'Julius AI', usage: '', link: 'https://julius.ai', price: 'חינם / בתשלום', difficulty: 'מתחילים' }
 ];
+
+const categories = [
+"תמונות / ליפסינק",
+"מודל שפה גדול",
+"תמונות / וידאו",
+"אוואטרים / ליפסינק",
+"תמונות / עריכה גרפית",
+"תמונות / עריכה גרפית / וידאו",
+"מוזיקה",
+"וידאו",
+"אופנה",
+"ללא קוד - פיתוח אתרים",
+"ללא קוד - קריאות API",
+"ללא קוד - יצירת סוכנים",
+"קוד פתוח",
+"קורסים - למידת מכונה",
+"אוטומציה",
+"שירותי ענן ליצירת תמונות",
+"קורסים - למידת מכונה בפייתון",
+"יצירת תמונות / הגדלת איכות תמונה",
+"תמונות / גרפיקה / וידאו",
+"מצגות / דוחות / מאמרים",
+"ניתוח נתונים",
+"כתיבת קוד",
+"פיתוח",
+"מחקר",
+"תמלול ויצירת כתוביות",
+"תמלול ויצירת כתוביות / עריכת וידאו",
+"מודלים של שפה",
+"מידול קולי",
+"מידול קולי / סוכני AI קוליים",
+"סוכני AI קוליים",
+"חיפוש מידע",
+"המרת תמונות לתלת מימד עם עומק",
+"החלפת פנים בתמונות / וידאו"
+];
+
+const ContactButton = ({ href, icon, description, bgColor }) => {
+const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
+
+const handleInteraction = (e) => {
+  if (e.type === 'touchstart') {
+    e.preventDefault();
+  }
+  setIsDescriptionVisible(!isDescriptionVisible);
+};
+
+return (
+  <div 
+    className="relative" 
+    onMouseEnter={() => setIsDescriptionVisible(true)} 
+    onMouseLeave={() => setIsDescriptionVisible(false)}
+    onTouchStart={handleInteraction}
+    onTouchEnd={(e) => e.preventDefault()}
+  >
+    <a 
+      href={href} 
+      className={`${bgColor} text-white p-2 rounded-full shadow-lg flex items-center justify-center`}
+      style={{width: '40px', height: '40px'}}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={(e) => {
+        if (isDescriptionVisible) {
+          e.preventDefault();
+          setIsDescriptionVisible(false);
+        }
+      }}
+    >
+      {icon}
+    </a>
+    {isDescriptionVisible && (
+      <div className="absolute left-12 top-0 bg-gray-800 text-white p-2 rounded shadow-lg whitespace-nowrap">
+        {description}
+      </div>
+    )}
+  </div>
+);
+};
 
 const AItoolsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -76,32 +155,41 @@ const AItoolsPage = () => {
   const [priceFilter, setPriceFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
 
-  // סינון הכלים לפי החיפוש והסינון
-  const filteredTools = aiTools.filter(tool => 
-    tool.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (difficultyFilter === '' || tool.difficulty === difficultyFilter) &&
-    (priceFilter === '' || tool.price.includes(priceFilter)) &&
-    (categoryFilter === '' || tool.category === categoryFilter)
-  );
+  const filteredTools = React.useMemo(() => {
+    // אם אין סינון פעיל, החזר את כל הכלים
+    if (!searchTerm && !difficultyFilter && !priceFilter && !categoryFilter) {
+      return aiTools;
+    }
+
+    // אחרת, בצע סינון
+    return aiTools.filter(tool => {
+      const matchesSearch = tool.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesDifficulty = !difficultyFilter || tool.difficulty === difficultyFilter;
+      const matchesPrice = !priceFilter || tool.price.includes(priceFilter);
+      const matchesCategory = !categoryFilter || tool.category === categoryFilter;
+
+      return matchesSearch && matchesDifficulty && matchesPrice && matchesCategory;
+    });
+  }, [searchTerm, difficultyFilter, priceFilter, categoryFilter]);
 
   return (
     <div className="min-h-screen bg-gray-100 p-4" dir="rtl">
       <header className="text-center mb-8">
-        <img src={logo} alt="KA Logo" className="h-56 mx-auto mb-4" />
-        <h1 className="text-4xl font-bold text-[#D9A25F]">כלי AI מובילים</h1>
+        <img src={logo} alt="KA Logo" className="h-32 md:h-56 mx-auto mb-4" />
+        <h1 className="text-3xl md:text-4xl font-bold text-[#D9A25F]">כלי AI מובילים</h1>
       </header>
 
       <div className="container mx-auto">
-        <div className="flex flex-wrap justify-center mb-6 space-x-4">
+        <div className="flex flex-col md:flex-row justify-center mb-6 space-y-4 md:space-y-0 md:space-x-4">
           <input 
             type="text" 
             placeholder="חפש כלי..." 
-            className="p-2 border rounded-lg shadow-md focus:outline-none focus:ring"
+            className="p-2 border rounded-lg shadow-md focus:outline-none focus:ring w-full md:w-auto"
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
           />
           <select 
-            className="p-2 border rounded-lg shadow-md focus:outline-none focus:ring ml-4"
+            className="p-2 border rounded-lg shadow-md focus:outline-none focus:ring w-full md:w-auto"
             value={difficultyFilter}
             onChange={e => setDifficultyFilter(e.target.value)}
           >
@@ -111,7 +199,7 @@ const AItoolsPage = () => {
             <option value="מתקדמים">מתקדמים</option>
           </select>
           <select 
-            className="p-2 border rounded-lg shadow-md focus:outline-none focus:ring ml-4"
+            className="p-2 border rounded-lg shadow-md focus:outline-none focus:ring w-full md:w-auto"
             value={priceFilter}
             onChange={e => setPriceFilter(e.target.value)}
           >
@@ -120,39 +208,14 @@ const AItoolsPage = () => {
             <option value="בתשלום">בתשלום</option>
           </select>
           <select 
-            className="p-2 border rounded-lg shadow-md focus:outline-none focus:ring ml-4"
+            className="p-2 border rounded-lg shadow-md focus:outline-none focus:ring w-full md:w-auto"
             value={categoryFilter}
             onChange={e => setCategoryFilter(e.target.value)}
           >
             <option value="">קטגוריה</option>
-            <option value="תמונות / ליפסינק">תמונות / ליפסינק</option>
-            <option value="מודל שפה גדול">מודל שפה גדול</option>
-            <option value="תמונות / וידאו">תמונות / וידאו</option>
-            <option value="אוואטרים / ליפסינק">אוואטרים / ליפסינק</option>
-            <option value="תמונות / עריכה גרפית">תמונות / עריכה גרפית</option>
-            <option value="תמונות / עריכה גרפית / וידאו">תמונות / עריכה גרפית / וידאו</option>
-            <option value="מוזיקה">מוזיקה</option>
-            <option value="וידאו">וידאו</option>
-            <option value="אופנה">אופנה</option>
-            <option value="ללא קוד - פיתוח אתרים">ללא קוד - פיתוח אתרים</option>
-            <option value="ללא קוד - קריאות API">ללא קוד - קריאות API</option>
-            <option value="ללא קוד - יצירת סוכנים">ללא קוד - יצירת סוכנים</option>
-            <option value="קוד פתוח">קוד פתוח</option>
-            <option value="קורסים - למידת מכונה">קורסים - למידת מכונה</option>
-            <option value="אוטומציה">אוטומציה</option>
-            <option value="שירותי ענן ליצירת תמונות">שירותי ענן ליצירת תמונות</option>
-            <option value="קורסים - למידת מכונה בפייתון">קורסים - למידת מכונה בפייתון</option>
-            <option value="יצירת תמונות / הגדלת איכות תמונה">יצירת תמונות / הגדלת איכות תמונה</option>
-            <option value="תמונות / גרפיקה / וידאו">תמונות / גרפיקה / וידאו</option>
-            <option value="מצגות / דוחות / מאמרים">מצגות / דוחות / מאמרים</option>
-            <option value="ניתוח נתונים">ניתוח נתונים</option>
-            <option value="כתיבת קוד">כתיבת קוד</option>
-            <option value="פיתוח">פיתוח</option>
-            <option value="מחקר">מחקר</option>
-            <option value="מודל שפה גדול">מודל שפה גדול</option>
-            <option value="תמלול ויצירת כתוביות">תמלול ויצירת כתוביות</option>
-            <option value="תמלול ויצירת כתוביות / עריכת וידאו">תמלול ויצירת כתוביות / עריכת וידאו</option>
-            <option value="מודלים של שפה">מודלים של שפה</option>
+            {categories.map((category, index) => (
+              <option key={index} value={category}>{category}</option>
+            ))}
           </select>
         </div>
 
@@ -165,21 +228,54 @@ const AItoolsPage = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: index * 0.1 }}
             >
-              <h2 className="text-2xl font-bold text-[#0D0D0D] mb-2">{tool.name}</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-[#0D0D0D] mb-2">{tool.name}</h2>
               <p className="text-gray-700"><strong>קטגוריה:</strong> {tool.category}</p>
               <p className="text-gray-700"><strong>שימוש:</strong> {tool.usage}</p>
-              <p className="text-gray-700"><strong>קישור:</strong> <a href={tool.link} className="text-[#D9A25F]" target="_blank" rel="noopener noreferrer">{tool.link}</a></p>
+              <p className="text-gray-700"><strong>קישור:</strong> <a href={tool.link} className="text-[#D9A25F]">{tool.link}</a></p>
               <p className="text-gray-700"><strong>מחיר:</strong> {tool.price}</p>
               <p className="text-gray-700"><strong>דרגת קושי:</strong> {tool.difficulty}</p>
             </motion.div>
           ))}
         </div>
+        {filteredTools.length === 0 && (
+          <div className="text-center text-gray-500 mt-8">
+            לא נמצאו כלים התואמים את החיפוש
+          </div>
+        )}
       </div>
       <div className="mt-8 text-center">
-  <p className="text-gray-600">קרדיט: יובל אבידני</p>
-</div>
+        <p className="text-gray-600">קרדיט: יובל אבידני</p>
+      </div>
+
+    {/* Floating Contact Links */}
+    <div className="fixed bottom-4 left-4 flex flex-col space-y-4">
+      <ContactButton 
+        href="https://chat.whatsapp.com/F4eKksEsU4n1LKVSwiXo82"
+        icon={<FaWhatsapp size={24} />}
+        description="הצטרף לקבוצת הוואטסאפ השקטה"
+        bgColor="bg-green-500"
+      />
+      <ContactButton 
+        href="https://wa.me/972523030009?text=היי%20אני%20אשמח%20לשמוע%20עוד%20על%20ההרצאות%20והסדנאות%20שלכם"
+        icon={<FaWhatsapp size={24} />}
+        description="שלח הודעת וואטסאפ אישית"
+        bgColor="bg-green-500"
+      />
+      <ContactButton 
+        href="mailto:kochavith.arnon@gmail.com"
+        icon={<MdEmail size={24} />}
+        description="שלח אימייל"
+        bgColor="bg-blue-500"
+      />
+      <ContactButton 
+        href="tel:+972523030009"
+        icon={<FaPhone size={24} />}
+        description="התקשר אלינו"
+        bgColor="bg-red-500"
+      />
     </div>
-  );
+  </div>
+);
 }
 
 export default AItoolsPage;
