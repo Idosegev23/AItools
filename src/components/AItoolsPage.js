@@ -108,46 +108,56 @@ const categories = [
 ];
 
 const ContactButton = ({ href, icon, description, bgColor }) => {
-const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
+  const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
-const handleInteraction = (e) => {
-  if (e.type === 'touchstart') {
-    e.preventDefault();
-  }
-  setIsDescriptionVisible(!isDescriptionVisible);
-};
+  useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
 
-return (
-  <div 
-    className="relative" 
-    onMouseEnter={() => setIsDescriptionVisible(true)} 
-    onMouseLeave={() => setIsDescriptionVisible(false)}
-    onTouchStart={handleInteraction}
-    onTouchEnd={(e) => e.preventDefault()}
-  >
-    <a 
-      href={href} 
-      className={`${bgColor} text-white p-2 rounded-full shadow-lg flex items-center justify-center`}
-      style={{width: '40px', height: '40px'}}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={(e) => {
-        if (isDescriptionVisible) {
-          e.preventDefault();
-          setIsDescriptionVisible(false);
-        }
-      }}
+  const handleTouchStart = (e) => {
+    if (!isDescriptionVisible) {
+      e.preventDefault();
+      setIsDescriptionVisible(true);
+    }
+  };
+
+  const handleClick = (e) => {
+    if (isTouchDevice && !isDescriptionVisible) {
+      e.preventDefault();
+      setIsDescriptionVisible(true);
+    } else {
+      setIsDescriptionVisible(false);
+    }
+  };
+
+  return (
+    <div 
+      className="relative" 
+      onMouseEnter={() => !isTouchDevice && setIsDescriptionVisible(true)} 
+      onMouseLeave={() => !isTouchDevice && setIsDescriptionVisible(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={(e) => e.preventDefault()}
     >
-      {icon}
-    </a>
-    {isDescriptionVisible && (
-      <div className="absolute left-12 top-0 bg-gray-800 text-white p-2 rounded shadow-lg whitespace-nowrap">
-        {description}
-      </div>
-    )}
-  </div>
-);
+      <a 
+        href={href} 
+        className={`${bgColor} text-white p-2 rounded-full shadow-lg flex items-center justify-center`}
+        style={{width: '40px', height: '40px'}}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={handleClick}
+      >
+        {icon}
+      </a>
+      {isDescriptionVisible && (
+        <div className="absolute left-12 top-0 bg-gray-800 text-white p-2 rounded shadow-lg whitespace-nowrap">
+          {description}
+        </div>
+      )}
+    </div>
+  );
 };
+
 
 const AItoolsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
