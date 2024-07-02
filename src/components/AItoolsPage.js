@@ -1,5 +1,5 @@
 // src/components/AItoolsPage.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaPhone } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
