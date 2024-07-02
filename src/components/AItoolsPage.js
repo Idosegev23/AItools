@@ -119,15 +119,8 @@ const ContactButton = ({ href, icon, description, bgColor }) => {
     if (!isDescriptionVisible) {
       e.preventDefault();
       setIsDescriptionVisible(true);
-    }
-  };
-
-  const handleClick = (e) => {
-    if (isTouchDevice && !isDescriptionVisible) {
-      e.preventDefault();
-      setIsDescriptionVisible(true);
     } else {
-      setIsDescriptionVisible(false);
+      window.location.href = href;
     }
   };
 
@@ -140,12 +133,17 @@ const ContactButton = ({ href, icon, description, bgColor }) => {
       onTouchEnd={(e) => e.preventDefault()}
     >
       <a 
-        href={href} 
+        href={isTouchDevice && !isDescriptionVisible ? '#' : href} 
         className={`${bgColor} text-white p-2 rounded-full shadow-lg flex items-center justify-center`}
         style={{ width: '40px', height: '40px' }}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={handleClick}
+        onClick={(e) => {
+          if (isTouchDevice && !isDescriptionVisible) {
+            e.preventDefault();
+            setIsDescriptionVisible(true);
+          }
+        }}
       >
         {icon}
       </a>
