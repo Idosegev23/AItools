@@ -142,14 +142,14 @@ const ContactButton = ({ href, icon, description, bgColor }) => {
       <a 
         href={href} 
         className={`${bgColor} text-white p-2 rounded-full shadow-lg flex items-center justify-center`}
-        style={{width: '40px', height: '40px'}}
+        style={{ width: '40px', height: '40px' }}
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleClick}
       >
         {icon}
       </a>
-      {isDescriptionVisible && (
+      {isDescriptionVisible && isTouchDevice && (
         <div className="absolute left-12 top-0 bg-gray-800 text-white p-2 rounded shadow-lg whitespace-nowrap">
           {description}
         </div>
@@ -157,7 +157,6 @@ const ContactButton = ({ href, icon, description, bgColor }) => {
     </div>
   );
 };
-
 
 const AItoolsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -257,35 +256,35 @@ const AItoolsPage = () => {
         <p className="text-gray-600">קרדיט: יובל אבידני</p>
       </div>
 
-    {/* Floating Contact Links */}
-    <div className="fixed bottom-4 left-4 flex flex-col space-y-4">
-      <ContactButton 
-        href="https://chat.whatsapp.com/F4eKksEsU4n1LKVSwiXo82"
-        icon={<FaWhatsapp size={24} />}
-        description="הצטרף לקבוצת הוואטסאפ השקטה"
-        bgColor="bg-green-500"
-      />
-      <ContactButton 
-        href="https://wa.me/972523030009?text=היי%20אני%20אשמח%20לשמוע%20עוד%20על%20ההרצאות%20והסדנאות%20שלכם"
-        icon={<FaWhatsapp size={24} />}
-        description="שלח הודעת וואטסאפ אישית"
-        bgColor="bg-green-500"
-      />
-      <ContactButton 
-        href="mailto:kochavith.arnon@gmail.com"
-        icon={<MdEmail size={24} />}
-        description="שלח אימייל"
-        bgColor="bg-blue-500"
-      />
-      <ContactButton 
-        href="tel:+972523030009"
-        icon={<FaPhone size={24} />}
-        description="התקשר אלינו"
-        bgColor="bg-red-500"
-      />
+      {/* Floating Contact Links */}
+      <div className="fixed bottom-4 left-4 flex flex-col space-y-4">
+        <ContactButton 
+          href="https://chat.whatsapp.com/F4eKksEsU4n1LKVSwiXo82"
+          icon={<FaWhatsapp size={24} />}
+          description="הצטרף לקבוצת הוואטסאפ השקטה"
+          bgColor="bg-green-500"
+        />
+        <ContactButton 
+          href="https://wa.me/972523030009?text=היי%20אני%20אשמח%20לשמוע%20עוד%20על%20ההרצאות%20והסדנאות%20שלכם"
+          icon={<FaWhatsapp size={24} />}
+          description="שלח הודעת וואטסאפ אישית"
+          bgColor="bg-green-500"
+        />
+        <ContactButton 
+          href="mailto:kochavith.arnon@gmail.com"
+          icon={<MdEmail size={24} />}
+          description="שלח אימייל"
+          bgColor="bg-blue-500"
+        />
+        <ContactButton 
+          href="tel:+972523030009"
+          icon={<FaPhone size={24} />}
+          description="התקשר אלינו"
+          bgColor="bg-red-500"
+        />
+      </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default AItoolsPage;
