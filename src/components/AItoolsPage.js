@@ -255,34 +255,34 @@ const AItoolsPage = () => {
       </div>
 
 {/* Floating Contact Links */}
-<div className="fixed bottom-4 left-4 flex flex-col space-y-4">
-  <ContactButton 
-    href="https://chat.whatsapp.com/F4eKksEsU4n1LKVSwiXo82"
-    icon={<FaWhatsapp size={24} />}
-    description="הצטרף לקבוצת הוואטסאפ השקטה"
-    bgColor="bg-green-500"
-  />
-  <ContactButton 
-    href="https://wa.me/972529772209?text=%D7%94%D7%99%D7%99%20%D7%90%D7%A0%D7%99%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%94%D7%A8%D7%A6%D7%90%D7%95%D7%AA%20%D7%95%D7%94%D7%A1%D7%93%D7%A0%D7%90%D7%95%D7%AA%20%D7%A9%D7%9C%D7%9B%D7%9D"
-    icon={<FaWhatsapp size={24} />}
-    description="שלח הודעת וואטסאפ אישית"
-    bgColor="bg-green-500"
-  />
-  <ContactButton 
-    href="mailto:kochavith.arnon@gmail.com"
-    icon={<MdEmail size={24} />}
-    description="שלח אימייל"
-    bgColor="bg-blue-500"
-  />
-  <ContactButton 
-    href="tel:+972529772209"
-    icon={<FaPhone size={24} />}
-    description="התקשר אלינו"
-    bgColor="bg-red-500"
-  />
-</div>
+div className="fixed bottom-4 left-4 flex flex-col space-y-4">
+    <ContactButton 
+      href="https://chat.whatsapp.com/F4eKksEsU4n1LKVSwiXo82"
+      icon={<FaWhatsapp size={24} />}
+      description="הצטרף לקבוצת הוואטסאפ השקטה"
+      bgColor="bg-green-500"
+    />
+    <ContactButton 
+      href="https://wa.me/972529772209?text=%D7%94%D7%99%D7%99%20%D7%90%D7%A0%D7%99%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%94%D7%A8%D7%A6%D7%90%D7%95%D7%AA%20%D7%95%D7%94%D7%A1%D7%93%D7%A0%D7%90%D7%95%D7%AA%20%D7%A9%D7%9C%D7%9B%D7%9D"
+      icon={<FaWhatsapp size={24} />}
+      description="שלח הודעת וואטסאפ אישית"
+      bgColor="bg-green-500"
+    />
+    <ContactButton 
+      href="mailto:kochavith.arnon@gmail.com"
+      icon={<MdEmail size={24} />}
+      description="שלח אימייל"
+      bgColor="bg-blue-500"
+    />
+    <ContactButton 
+      href="tel:+972529772209"
+      icon={<FaPhone size={24} />}
+      description="התקשר אלינו"
+      bgColor="bg-red-500"
+    />
+  </div>
+);
 
-  );
 }
 
 export default AItoolsPage;
