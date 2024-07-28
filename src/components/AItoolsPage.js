@@ -263,7 +263,7 @@ const AItoolsPage = () => {
           bgColor="bg-green-500"
         />
         <ContactButton 
-          href="https://wa.me/972529772209?text=היי%20אני%20אשמח%20לשמוע%20עוד%20על%20ההרצאות%20והסדנאות%20שלכם"
+          href="https://wa.me/972523030009?text=היי%20אני%20אשמח%20לשמוע%20עוד%20על%20ההרצאות%20והסדנאות%20שלכם"
           icon={<FaWhatsapp size={24} />}
           description="שלח הודעת וואטסאפ אישית"
           bgColor="bg-green-500"
@@ -275,7 +275,7 @@ const AItoolsPage = () => {
           bgColor="bg-blue-500"
         />
         <ContactButton 
-          href="tel:+972529772209"
+          href="tel:+972523030009"
           icon={<FaPhone size={24} />}
           description="התקשר אלינו"
           bgColor="bg-red-500"
