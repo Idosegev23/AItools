@@ -254,7 +254,7 @@ const AItoolsPage = () => {
         <p className="text-gray-600">קרדיט: יובל אבידני</p>
       </div>
 
-      {/* Floating Contact Links */}
+{/* Floating Contact Links */}
 <div className="fixed bottom-4 left-4 flex flex-col space-y-4">
   <ContactButton 
     href="https://chat.whatsapp.com/F4eKksEsU4n1LKVSwiXo82"
