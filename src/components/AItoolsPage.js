@@ -69,6 +69,22 @@ const aiTools = [
 { category: 'מצגות / דוחות / מאמרים', name: 'Office Co-Pilot', usage: '', link: 'https://copilot.cloud.microsoft/en-us/prompts', price: 'בתשלום', difficulty: 'מתחילים' },
 { category: 'מצגות / דוחות / מאמרים', name: 'gamma.app', usage: 'יצירת מצגות ודוחות אוטומטית', link: 'https://gamma.app', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
 { category: 'ניתוח נתונים', name: 'Julius AI', usage: '', link: 'https://julius.ai', price: 'חינם / בתשלום', difficulty: 'מתחילים' }
+  {
+    category: 'ניהול זמן ופגישות',
+    name: 'timeOS',
+    usage: 'ניהול פגישות באמצעות בינה מלאכותית, כולל תמלול, סיכום, ותזמון חכם',
+    link: 'https://www.timeos.ai',
+    price: 'חינם / בתשלום',
+    difficulty: 'מתחילים'
+  },
+  {
+    category: 'יצירת ויזואליזציות מטקסט',
+    name: 'Napkin AI',
+    usage: 'המרת תוכן טקסטואלי לויזואליזציות כמו דיאגרמות, תרשימים ותמונות',
+    link: 'https://napkin.ai',
+    price: 'חינם / בתשלום',
+    difficulty: 'מתחילים'
+  }
 ];
 
 const categories = [
