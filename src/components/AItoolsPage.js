@@ -120,8 +120,11 @@ const categories = [
 "סוכני AI קוליים",
 "חיפוש מידע",
 "המרת תמונות לתלת מימד עם עומק",
-"החלפת פנים בתמונות / וידאו"
+"החלפת פנים בתמונות / וידאו",
+"ניהול זמן ופגישות",
+"יצירת ויזואליזציות מטקסט"
 ];
+
 
 const ContactButton = ({ href, icon, description, bgColor }) => {
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
