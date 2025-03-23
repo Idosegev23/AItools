@@ -214,10 +214,10 @@ const AItoolsPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-4" dir="rtl">
       <header className="text-center mb-8">
-        <img src={logo} alt="KA Logo" className="h-32 md:h-56 mx-auto mb-4" />
-        <h1 className="text-3xl md:text-4xl font-bold text-[#D9A25F]">כלי AI מובילים</h1>
-      </header>
-
+  <img src={logo} alt="KA Logo" className="h-32 md:h-56 mx-auto mb-4" />
+  <h1 className="text-3xl md:text-4xl font-bold text-[#D9A25F]">כלי AI מובילים</h1>
+  <p className="text-gray-600 mt-2">עודכן לאחרונה: 23.3.25</p>
+</header>
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row justify-center mb-6 space-y-4 md:space-y-0 md:space-x-4">
           <input 
