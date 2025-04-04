@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaPhone } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
-import logo from '../assets/logo11.png';
+import logo from 'https://res.cloudinary.com/dsoh3yteb/image/upload/v1742806446/Logo2025_xbrzm3.png';
 import 'tailwindcss/tailwind.css';
 
 const aiTools = [
