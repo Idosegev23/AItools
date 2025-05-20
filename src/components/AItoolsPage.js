@@ -1,200 +1,11 @@
 // src/components/AItoolsPage.js
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useSpring, animated, config } from 'react-spring';
-import { TextField, Select, MenuItem, Button, Typography, Container, Grid, ThemeProvider, createTheme, IconButton } from '@mui/material';
-import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components';
-import { Tilt } from 'react-tilt';
-import { ParallaxProvider } from 'react-scroll-parallax';
-import { useInView } from 'react-intersection-observer';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { FaWhatsapp, FaPhone } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import 'tailwindcss/tailwind.css';
 
-// Define a custom theme
-const theme = createTheme({
-  spacing: 8,
-});
-
-const StyledContainer = styled(Container)`
-  min-height: 100vh;
-  padding: ${props => props.theme.spacing(4)}px;
-  direction: rtl;
-  position: relative;
-  overflow: hidden;
-  background-color: #FFFFFF;
-  color: #0D0D0D;
-`;
-
-const Header = styled.header`
-  text-align: center;
-  margin-bottom: ${props => props.theme.spacing(8)}px;
-  position: relative;
-  padding-top: 50px;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-`;
-
-const Logo = styled.img`
-  height: 200px;
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 2;
-`;
-
-const SearchContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: ${props => props.theme.spacing(2)}px;
-  margin-bottom: ${props => props.theme.spacing(6)}px;
-  background: rgba(98, 35, 140, 0.1);
-  padding: ${props => props.theme.spacing(3)}px;
-  border-radius: 16px;
-  position: relative;
-  z-index: 1;
-`;
-
-const StyledButton = styled(Button)`
-  background: linear-gradient(45deg, rgba(98,35,140,0.8) 30%, rgba(191,75,129,0.8) 90%);
-  border: 0;
-  border-radius: 3px;
-  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
-  color: white;
-  height: 48px;
-  padding: 0 30px;
-  transition: all 0.3s;
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 10px 4px rgba(255, 105, 135, .3);
-  }
-`;
-
-const SocialLinksContainer = styled.div`
-  position: fixed;
-  left: ${props => props.theme.spacing(2)}px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: ${props => props.theme.spacing(2)}px;
-  z-index: 1000;
-`;
-
-const SocialIconButton = styled(IconButton)`
-  background-color: #62238C !important;
-  color: white !important;
-  &:hover {
-    background-color: #BF4B81 !important;
-  }
-`;
-
-const TikTokIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g clipPath="url(#clip0)">
-      <path d="M34.8916 0H26.2875V32.7688C26.2875 36.5917 23.1833 39.6959 19.3604 39.6959C15.5375 39.6959 12.4333 36.5917 12.4333 32.7688C12.4333 29.0146 15.4688 25.9479 19.1833 25.8417V17.1688C10.6146 17.275 3.76245 24.2125 3.76245 32.7688C3.76245 41.3938 10.7354 48.3667 19.3604 48.3667C28.0541 48.3667 34.9583 41.4625 34.9583 32.7688V16.0167C38.1312 18.2667 42.0229 19.5875 46.1833 19.6562V10.9833C39.9979 10.7688 34.8916 5.93752 34.8916 0Z" fill="white"/>
-    </g>
-    <defs>
-      <clipPath id="clip0">
-        <rect width="48" height="48" fill="white"/>
-      </clipPath>
-    </defs>
-  </svg>
-);
-
-const ToolCard = React.memo(({ tool, index }) => (
-  <Grid item xs={12} sm={6} md={4}>
-    <Tilt options={{ max: 25, scale: 1.05, perspective: 1000 }}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.2 }}
-        style={{
-          background: 'rgba(255, 255, 255, 0.1)',
-          borderRadius: '16px',
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-          backdropFilter: 'blur(5px)',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
-          padding: '24px',
-          textAlign: 'center',
-        }}
-      >
-        <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: 1, color: '#62238C' }}>
-          {tool.name}
-        </Typography>
-        <Typography variant="body2" sx={{ marginBottom: 1, color: '#0D0D0D' }}>
-          <strong>קטגוריה:</strong> {tool.category}
-        </Typography>
-        <Typography variant="body2" sx={{ marginBottom: 1, color: '#0D0D0D' }}>
-          <strong>שימוש:</strong> {tool.usage}
-        </Typography>
-        <Typography variant="body2" sx={{ marginBottom: 1, color: '#0D0D0D' }}>
-          <strong>מחיר:</strong> {tool.price}
-        </Typography>
-        <Typography variant="body2" sx={{ marginBottom: 2, color: '#0D0D0D' }}>
-          <strong>דרגת קושי:</strong> {tool.difficulty}
-        </Typography>
-        <StyledButton
-          variant="contained"
-          href={tool.link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          קח אותי לשם
-        </StyledButton>
-      </motion.div>
-    </Tilt>
-  </Grid>
-));
-
-const categories = [
-  'תמונות / ליפסינק',
-  'מודל שפה גדול',
-  'תמונות / וידאו',
-  'אוואטרים / ליפסינק',
-  'תמונות / עריכה גרפית',
-  'תמונות / עריכה גרפית / וידאו',
-  'מוזיקה',
-  'מידול קולי / סוכני AI קוליים',
-  'מידול קולי',
-  'קוד פתוח',
-  'קורסים - למידת מכונה',
-  'אוטומציה',
-  'ללא קוד - קריאות API',
-  'ללא קוד - יצירת סוכנים',
-  'תמונות / גרפיקה / וידאו',
-  'שירותי ענן ליצירת תמונות',
-  'קורסים - למידת מכונה בפייתון',
-  'תמונות',
-  'יצירת תמונות / הגדלת איכות תמונה',
-  'המרת תמונות לתלת מימד עם עומק',
-  'תמונות / גרפיקה',
-  'החלפת פנים בתמונות / וידאו',
-  'ללא קוד - פיתוח אתרים',
-  'וידאו',
-  'אופנה',
-  'מודלים של שפה',
-  'סוכני AI קוליים',
-  'חיפוש מידע',
-  'תמלול ויצירת כתוביות',
-  'תמלול ויצירת כתוביות / עריכת וידאו',
-  'כתיבת קוד',
-  'פיתוח',
-  'מחקר',
-  'מצגות / דוחות / מאמרים',
-  'ניתוח נתונים',
-  'ניהול זמן ופגישות',
-  'יצירת ויזואליזציות מטקסט'
-];
-
+// מערך הכלים (aiTools)
 const aiTools = [
   { category: 'תמונות / ליפסינק', name: 'Artflow', usage: 'יצירת תמונות, אימון מודל על תמונות שלנו, ליפסינק לאוואטרים, יצירת סרטונים', link: 'https://artflow.ai', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
   { category: 'מודל שפה גדול', name: 'ChatGPT', usage: 'מענה על שאלות בכל הנושאים, יכולת ליצור ולערוך תמונות', link: 'https://chat.openai.com', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
@@ -257,11 +68,60 @@ const aiTools = [
   { category: 'מודל שפה גדול', name: 'Microsoft Co-Pilot', usage: '', link: 'https://copilot.microsoft.com', price: 'חינם', difficulty: 'מתחילים' },
   { category: 'מצגות / דוחות / מאמרים', name: 'Office Co-Pilot', usage: '', link: 'https://copilot.cloud.microsoft/en-us/prompts', price: 'בתשלום', difficulty: 'מתחילים' },
   { category: 'ניתוח נתונים', name: 'Julius AI', usage: '', link: 'https://julius.ai', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
-  { category: 'מצגות / דוחות / מאמרים', name: 'gamma.app', usage: 'יצירת מצגות ודוחות אוטומטית', link: 'https://gamma.app', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
+  // הוספת הכלים החדשים
   { category: 'תמונות / גרפיקה', name: 'Reve.art', usage: 'יצירת תמונות אומנותיות מטקסט, העברת סגנונות, ותמונות באיכות גבוהה', link: 'https://reve-art.com', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
+  { category: 'מצגות / דוחות / מאמרים', name: 'gamma.app', usage: 'יצירת מצגות ודוחות אוטומטית', link: 'https://gamma.app', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
   { category: 'וידאו', name: 'Revid.ai', usage: 'הפיכת טקסט לסרטונים באיכות מקצועית', link: 'https://www.revid.ai', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
 ];
 
+// קטגוריות
+const categories = [
+  "תמונות / ליפסינק",
+  "מודל שפה גדול",
+  "תמונות / וידאו",
+  "אוואטרים / ליפסינק",
+  "תמונות / עריכה גרפית",
+  "תמונות / עריכה גרפית / וידאו",
+  "מוזיקה",
+  "וידאו",
+  "אופנה",
+  "ללא קוד - פיתוח אתרים",
+  "ללא קוד - קריאות API",
+  "ללא קוד - יצירת סוכנים",
+  "קוד פתוח",
+  "קורסים - למידת מכונה",
+  "אוטומציה",
+  "שירותי ענן ליצירת תמונות",
+  "קורסים - למידת מכונה בפייתון",
+  "יצירת תמונות / הגדלת איכות תמונה",
+  "תמונות / גרפיקה / וידאו",
+  "מצגות / דוחות / מאמרים",
+  "ניתוח נתונים",
+  "כתיבת קוד",
+  "פיתוח",
+  "מחקר",
+  "תמלול ויצירת כתוביות",
+  "תמלול ויצירת כתוביות / עריכת וידאו",
+  "מודלים של שפה",
+  "מידול קולי",
+  "מידול קולי / סוכני AI קוליים",
+  "סוכני AI קוליים",
+  "חיפוש מידע",
+  "המרת תמונות לתלת מימד עם עומק",
+  "החלפת פנים בתמונות / וידאו",
+  "ניהול זמן ופגישות",
+  "יצירת ויזואליזציות מטקסט"
+];
+
+// צבעים לפי התמה החדשה
+const colors = {
+  yellow: '#F2E205',
+  gold: '#D9B366',
+  white: '#FFFFFF',
+  black: '#0D0D0D',
+};
+
+// קומפוננטת כפתור יצירת קשר
 const ContactButton = ({ href, icon, description, bgColor }) => {
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -289,8 +149,8 @@ const ContactButton = ({ href, icon, description, bgColor }) => {
     >
       <a 
         href={isTouchDevice && !isDescriptionVisible ? '#' : href} 
-        className={`${bgColor} text-white p-2 rounded-full shadow-lg flex items-center justify-center`}
-        style={{ width: '40px', height: '40px' }}
+        className={`${bgColor} text-white p-2 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300`}
+        style={{ width: '48px', height: '48px' }}
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => {
@@ -302,8 +162,8 @@ const ContactButton = ({ href, icon, description, bgColor }) => {
       >
         {icon}
       </a>
-      {isDescriptionVisible && isTouchDevice && (
-        <div className="absolute left-12 top-0 bg-gray-800 text-white p-2 rounded shadow-lg whitespace-nowrap">
+      {isDescriptionVisible && (
+        <div className="absolute left-14 top-0 bg-black text-white p-2 rounded-md shadow-lg whitespace-nowrap z-50">
           {description}
         </div>
       )}
@@ -311,162 +171,193 @@ const ContactButton = ({ href, icon, description, bgColor }) => {
   );
 };
 
+// הקומפוננטה הראשית
 const AItoolsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [difficultyFilter, setDifficultyFilter] = useState('');
   const [priceFilter, setPriceFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
-  
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
 
-  const headerAnimation = useSpring({
-    opacity: inView ? 1 : 0,
-    transform: inView ? 'translateY(0)' : 'translateY(-50px)',
-    config: config.molasses,
-  });
+  const filteredTools = React.useMemo(() => {
+    if (!searchTerm && !difficultyFilter && !priceFilter && !categoryFilter) {
+      return aiTools;
+    }
 
-  const titleAnimation = useSpring({
-    from: { opacity: 0, transform: 'scale(0.8)' },
-    to: { opacity: 1, transform: 'scale(1)' },
-    config: config.wobbly,
-  });
-
-  const filterTools = useCallback((tools) => {
-    return tools.filter(tool =>
-      tool.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (!difficultyFilter || tool.difficulty === difficultyFilter) &&
-      (!priceFilter || tool.price.includes(priceFilter)) &&
-      (!categoryFilter || tool.category === categoryFilter)
-    );
+    return aiTools.filter(tool => {
+      const matchesSearch = tool.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesDifficulty = !difficultyFilter || tool.difficulty === difficultyFilter;
+      const matchesPrice = !priceFilter || tool.price.includes(priceFilter);
+      const matchesCategory = !categoryFilter || tool.category === categoryFilter;
+      return matchesSearch && matchesDifficulty && matchesPrice && matchesCategory;
+    });
   }, [searchTerm, difficultyFilter, priceFilter, categoryFilter]);
 
-  const filteredTools = useMemo(() => filterTools(aiTools), [filterTools]);
-
   return (
-    <ThemeProvider theme={theme}>
-      <StyledThemeProvider theme={theme}>
-        <ParallaxProvider>
-          <StyledContainer maxWidth={false}>
-            <Header ref={ref}>
-              <animated.div style={headerAnimation}>
-                <Logo 
-                  src="https://res.cloudinary.com/dsoh3yteb/image/upload/v1742806446/Logo2025_xbrzm3.png" 
-                  alt="KA Logo" 
-                />
-                <animated.div style={titleAnimation}>
-                  <Typography variant="h2" sx={{ 
-                    fontWeight: 'bold', 
-                    marginBottom: 2, 
-                    color: '#62238C',
-                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
-                    '@media (max-width:600px)': {
-                      fontSize: '2.5rem',
-                    },
-                  }}>
-                    כלי AI מובילים
-                  </Typography>
-                </animated.div>
-                <Typography variant="h5" sx={{ 
-                  marginBottom: 4, 
-                  color: '#0D0D0D',
-                  '@media (max-width:600px)': {
-                    fontSize: '1.2rem',
-                  },
-                }}>
-                  גלה את הכלים החדשניים ביותר בתחום הבינה המלאכותית
-                </Typography>
-                <Typography variant="body1" sx={{ color: '#555' }}>
-                  עודכן לאחרונה: 20.5.25
-                </Typography>
-              </animated.div>
-            </Header>
+    <div className="min-h-screen bg-gradient-to-br from-white to-gray-100 p-4" dir="rtl">
+      {/* גלים דקורטיביים בראש העמוד */}
+      <div className="absolute top-0 left-0 right-0 h-72 overflow-hidden z-0">
+        <svg className="absolute bottom-0 left-0 w-full" 
+             xmlns="http://www.w3.org/2000/svg" 
+             viewBox="0 0 1440 320">
+          <path fill="rgba(242, 226, 5, 0.1)" 
+                d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,229.3C672,256,768,288,864,277.3C960,267,1056,213,1152,176C1248,139,1344,117,1392,106.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+          </path>
+        </svg>
+        <svg className="absolute bottom-0 left-0 w-full" 
+             xmlns="http://www.w3.org/2000/svg" 
+             viewBox="0 0 1440 320">
+          <path fill="rgba(217, 179, 102, 0.1)" 
+                d="M0,192L48,176C96,160,192,128,288,117.3C384,107,480,117,576,149.3C672,181,768,235,864,224C960,213,1056,139,1152,128C1248,117,1344,171,1392,197.3L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+          </path>
+        </svg>
+      </div>
 
-            <SearchContainer>
-              <TextField
-                label="חפש כלי..."
-                variant="outlined"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                sx={{ 
-                  flexGrow: 1, 
-                  maxWidth: '300px', 
-                  input: { color: '#0D0D0D', textAlign: 'right' }, 
-                  '& label': { color: '#0D0D0D', right: 0, transformOrigin: 'right' },
-                  '& label.Mui-focused': { transformOrigin: 'right' }
-                }}
-                InputLabelProps={{
-                  style: { right: 14, left: 'auto' }
-                }}
-              />
-              <Select
-                value={difficultyFilter}
-                onChange={(e) => setDifficultyFilter(e.target.value)}
-                displayEmpty
-                sx={{ minWidth: '120px', color: '#0D0D0D', '& .MuiSelect-icon': { color: '#0D0D0D' } }}
+      <header className="relative text-center mb-8 z-10">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <img 
+            src="https://res.cloudinary.com/dsoh3yteb/image/upload/v1742806446/Logo2025_xbrzm3.png"
+            alt="KA Logo"
+            className="h-32 md:h-56 mx-auto mb-4 drop-shadow-md"
+          />
+          <h1 className="text-4xl md:text-5xl font-bold text-black mb-2 drop-shadow-sm">
+            כלי <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600">AI</span> מובילים
+          </h1>
+          <p className="text-xl text-gray-700 mb-4">גלה את הכלים החדשניים ביותר בתחום הבינה המלאכותית</p>
+          <p className="text-gray-500 mt-2">עודכן לאחרונה: 20.5.25</p>
+        </motion.div>
+      </header>
+
+      <div className="container mx-auto relative z-10">
+        {/* חיפוש וסינון */}
+        <motion.div 
+          className="mb-8 p-6 bg-white rounded-xl shadow-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <div className="flex flex-col md:flex-row justify-center mb-6 space-y-4 md:space-y-0 md:space-x-4">
+            <input 
+              type="text" 
+              placeholder="חפש כלי..." 
+              className="p-3 border-2 border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent w-full md:w-auto"
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+            />
+            <select 
+              className="p-3 border-2 border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent w-full md:w-auto"
+              value={difficultyFilter}
+              onChange={e => setDifficultyFilter(e.target.value)}
+            >
+              <option value="">רמת קושי</option>
+              <option value="מתחילים">מתחילים</option>
+              <option value="בינוני">בינוני</option>
+              <option value="מתקדמים">מתקדמים</option>
+            </select>
+            <select 
+              className="p-3 border-2 border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent w-full md:w-auto"
+              value={priceFilter}
+              onChange={e => setPriceFilter(e.target.value)}
+            >
+              <option value="">עלות</option>
+              <option value="חינם">חינם</option>
+              <option value="בתשלום">בתשלום</option>
+            </select>
+            <select 
+              className="p-3 border-2 border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent w-full md:w-auto"
+              value={categoryFilter}
+              onChange={e => setCategoryFilter(e.target.value)}
+            >
+              <option value="">קטגוריה</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category}>{category}</option>
+              ))}
+            </select>
+          </div>
+        </motion.div>
+
+        {/* כרטיסי הכלים */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredTools.map((tool, index) => (
+            <motion.div 
+              key={index}
+              className="relative bg-white p-6 rounded-xl shadow-md border-b-4 border-yellow-400 hover:shadow-xl transition-shadow duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05, duration: 0.3 }}
+              whileHover={{ 
+                y: -5,
+                transition: { duration: 0.2 }
+              }}
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-yellow-600"></div>
+              <h2 className="text-2xl font-bold text-black mb-3">{tool.name}</h2>
+              <div className="space-y-2 mb-4">
+                <p className="text-gray-700"><span className="font-bold text-yellow-700">קטגוריה:</span> {tool.category}</p>
+                <p className="text-gray-700"><span className="font-bold text-yellow-700">שימוש:</span> {tool.usage || 'לא צוין'}</p>
+                <p className="text-gray-700"><span className="font-bold text-yellow-700">מחיר:</span> {tool.price}</p>
+                <p className="text-gray-700"><span className="font-bold text-yellow-700">דרגת קושי:</span> {tool.difficulty}</p>
+              </div>
+              <a 
+                href={tool.link} 
+                className="mt-3 inline-block py-2 px-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-medium rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+                target="_blank"
+                rel="noreferrer"
               >
-                <MenuItem value="">רמת קושי</MenuItem>
-                <MenuItem value="מתחילים">מתחילים</MenuItem>
-                <MenuItem value="בינוני">בינוני</MenuItem>
-                <MenuItem value="מתקדמים">מתקדמים</MenuItem>
-              </Select>
-              <Select
-                value={priceFilter}
-                onChange={(e) => setPriceFilter(e.target.value)}
-                displayEmpty
-                sx={{ minWidth: '120px', color: '#0D0D0D', '& .MuiSelect-icon': { color: '#0D0D0D' } }}
-              >
-                <MenuItem value="">עלות</MenuItem>
-                <MenuItem value="חינם">חינם</MenuItem>
-                <MenuItem value="בתשלום">בתשלום</MenuItem>
-              </Select>
-              <Select
-                value={categoryFilter}
-                onChange={(e) => setCategoryFilter(e.target.value)}
-                displayEmpty
-                sx={{ minWidth: '150px', color: '#0D0D0D', '& .MuiSelect-icon': { color: '#0D0D0D' } }}
-              >
-                <MenuItem value="">קטגוריה</MenuItem>
-                {categories.map((category) => (
-                  <MenuItem key={category} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-              </Select>
-            </SearchContainer>
+                קח אותי לשם
+              </a>
+            </motion.div>
+          ))}
+        </div>
 
-            <Grid container spacing={4}>
-              <AnimatePresence>
-                {filteredTools.map((tool, index) => (
-                  <ToolCard key={tool.name} tool={tool} index={index} />
-                ))}
-              </AnimatePresence>
-            </Grid>
+        {filteredTools.length === 0 && (
+          <div className="text-center text-gray-500 mt-8 p-10 bg-white rounded-lg shadow-md">
+            <p className="text-xl">לא נמצאו כלים התואמים את החיפוש</p>
+            <p className="mt-2">נסה לשנות את פרמטרי החיפוש</p>
+          </div>
+        )}
+      </div>
 
-            <SocialLinksContainer>
-              <SocialIconButton href="https://www.facebook.com/profile.php?id=61553596496338" target="_blank" rel="noopener noreferrer">
-                <FacebookIcon />
-              </SocialIconButton>
-              <SocialIconButton href="https://www.instagram.com/triroars/" target="_blank" rel="noopener noreferrer">
-                <InstagramIcon />
-              </SocialIconButton>
-              <SocialIconButton href="https://www.tiktok.com/@triroars" target="_blank" rel="noopener noreferrer">
-                <TikTokIcon />
-              </SocialIconButton>
-              <SocialIconButton href="https://chat.whatsapp.com/Er9gUVQ0zxsF1BDSQlCbMC" target="_blank" rel="noopener noreferrer">
-                <WhatsAppIcon />
-              </SocialIconButton>
-            </SocialLinksContainer>
+      {/* פוטר */}
+      <div className="mt-16 py-8 text-center">
+        <p className="text-gray-600 mb-4">קרדיט: יובל אבידני</p>
+        <div className="flex justify-center space-x-4">
+          <a href="#" className="text-yellow-600 hover:text-yellow-800 transition-colors duration-200">תנאי שימוש</a>
+          <a href="#" className="text-yellow-600 hover:text-yellow-800 transition-colors duration-200">מדיניות פרטיות</a>
+        </div>
+      </div>
 
-            <Typography variant="body2" sx={{ textAlign: 'center', marginTop: 4, color: '#0D0D0D' }}>
-              נבנה בעזרת AI | קרדיט: יובל אבידני
-            </Typography>
-          </StyledContainer>
-        </ParallaxProvider>
-      </StyledThemeProvider>
-    </ThemeProvider>
+      {/* כפתורי יצירת קשר */}
+      <div className="fixed bottom-6 left-6 flex flex-col space-y-4 z-50">
+        <ContactButton 
+          href="https://chat.whatsapp.com/F4eKksEsU4n1LKVSwiXo82"
+          icon={<FaWhatsapp size={24} />}
+          description="הצטרף לקבוצת הוואטסאפ השקטה"
+          bgColor="bg-green-500"
+        />
+        <ContactButton 
+          href="https://wa.me/972529772209?text=היי%20אני%20אשמח%20לשמוע%20עוד%20על%20ההרצאות%20והסדנאות%20שלכם"
+          icon={<FaWhatsapp size={24} />}
+          description="שלח הודעת וואטסאפ אישית"
+          bgColor="bg-yellow-500"
+        />
+        <ContactButton 
+          href="mailto:kochavith.arnon@gmail.com"
+          icon={<MdEmail size={24} />}
+          description="שלח אימייל"
+          bgColor="bg-blue-500"
+        />
+        <ContactButton 
+          href="tel:+972529772209"
+          icon={<FaPhone size={24} />}
+          description="התקשר אלינו"
+          bgColor="bg-red-500"
+        />
+      </div>
+    </div>
   );
 };
 
