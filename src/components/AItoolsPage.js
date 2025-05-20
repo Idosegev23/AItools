@@ -7,7 +7,6 @@ import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import { Tilt } from 'react-tilt';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import { useInView } from 'react-intersection-observer';
-import logo from '../assets/NewLogo_BLANK.png';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
@@ -302,7 +301,10 @@ const AItoolsPage = () => {
           <StyledContainer maxWidth={false}>
             <Header ref={ref}>
               <animated.div style={headerAnimation}>
-                <Logo src={logo} alt="KA Logo" />
+                <Logo 
+                  src="https://res.cloudinary.com/dsoh3yteb/image/upload/v1742806446/Logo2025_xbrzm3.png" 
+                  alt="KA Logo" 
+                />
                 <animated.div style={titleAnimation}>
                   <Typography variant="h2" sx={{ 
                     fontWeight: 'bold', 

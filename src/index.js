@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css'; // ה-CSS הכללי שלך
-import './tailwind.css'; // ה-CSS של Tailwind
+// מסיר את הייבוא של Tailwind
+// import './tailwind.css'; // ה-CSS של Tailwind
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
