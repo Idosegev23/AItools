@@ -1,5 +1,5 @@
 // src/components/AItoolsPage.js
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSpring, animated, config } from 'react-spring';
 import { TextField, Select, MenuItem, Button, Typography, Container, Grid, ThemeProvider, createTheme, IconButton } from '@mui/material';
@@ -10,6 +10,9 @@ import { useInView } from 'react-intersection-observer';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import { FaWhatsapp, FaPhone } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
+import 'tailwindcss/tailwind.css';
 
 // Define a custom theme
 const theme = createTheme({
@@ -254,11 +257,59 @@ const aiTools = [
   { category: 'מודל שפה גדול', name: 'Microsoft Co-Pilot', usage: '', link: 'https://copilot.microsoft.com', price: 'חינם', difficulty: 'מתחילים' },
   { category: 'מצגות / דוחות / מאמרים', name: 'Office Co-Pilot', usage: '', link: 'https://copilot.cloud.microsoft/en-us/prompts', price: 'בתשלום', difficulty: 'מתחילים' },
   { category: 'ניתוח נתונים', name: 'Julius AI', usage: '', link: 'https://julius.ai', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
-  // הוספת הכלים החדשים
-  { category: 'תמונות / גרפיקה', name: 'Reve.art', usage: 'יצירת תמונות אומנותיות מטקסט, העברת סגנונות, ותמונות באיכות גבוהה', link: 'https://reve-art.com', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
   { category: 'מצגות / דוחות / מאמרים', name: 'gamma.app', usage: 'יצירת מצגות ודוחות אוטומטית', link: 'https://gamma.app', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
+  { category: 'תמונות / גרפיקה', name: 'Reve.art', usage: 'יצירת תמונות אומנותיות מטקסט, העברת סגנונות, ותמונות באיכות גבוהה', link: 'https://reve-art.com', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
   { category: 'וידאו', name: 'Revid.ai', usage: 'הפיכת טקסט לסרטונים באיכות מקצועית', link: 'https://www.revid.ai', price: 'חינם / בתשלום', difficulty: 'מתחילים' },
 ];
+
+const ContactButton = ({ href, icon, description, bgColor }) => {
+  const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
+
+  const handleTouchStart = (e) => {
+    if (!isDescriptionVisible) {
+      e.preventDefault();
+      setIsDescriptionVisible(true);
+    } else {
+      window.location.href = href;
+    }
+  };
+
+  return (
+    <div 
+      className="relative" 
+      onMouseEnter={() => !isTouchDevice && setIsDescriptionVisible(true)} 
+      onMouseLeave={() => !isTouchDevice && setIsDescriptionVisible(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={(e) => e.preventDefault()}
+    >
+      <a 
+        href={isTouchDevice && !isDescriptionVisible ? '#' : href} 
+        className={`${bgColor} text-white p-2 rounded-full shadow-lg flex items-center justify-center`}
+        style={{ width: '40px', height: '40px' }}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => {
+          if (isTouchDevice && !isDescriptionVisible) {
+            e.preventDefault();
+            setIsDescriptionVisible(true);
+          }
+        }}
+      >
+        {icon}
+      </a>
+      {isDescriptionVisible && isTouchDevice && (
+        <div className="absolute left-12 top-0 bg-gray-800 text-white p-2 rounded shadow-lg whitespace-nowrap">
+          {description}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const AItoolsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
