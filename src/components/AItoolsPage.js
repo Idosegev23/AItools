@@ -113,13 +113,6 @@ const categories = [
   "יצירת ויזואליזציות מטקסט"
 ];
 
-// צבעים לפי התמה החדשה
-const colors = {
-  yellow: '#F2E205',
-  gold: '#D9B366',
-  white: '#FFFFFF',
-  black: '#0D0D0D',
-};
 
 // קומפוננטת כפתור יצירת קשר
 const ContactButton = ({ href, icon, description, bgColor }) => {
@@ -325,8 +318,8 @@ const AItoolsPage = () => {
       <div className="mt-16 py-8 text-center">
         <p className="text-gray-600 mb-4">קרדיט: יובל אבידני</p>
         <div className="flex justify-center space-x-4">
-          <a href="#" className="text-yellow-600 hover:text-yellow-800 transition-colors duration-200">תנאי שימוש</a>
-          <a href="#" className="text-yellow-600 hover:text-yellow-800 transition-colors duration-200">מדיניות פרטיות</a>
+          <button className="text-yellow-600 hover:text-yellow-800 transition-colors duration-200">תנאי שימוש</button>
+          <button className="text-yellow-600 hover:text-yellow-800 transition-colors duration-200">מדיניות פרטיות</button>
         </div>
       </div>
 
