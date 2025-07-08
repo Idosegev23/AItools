@@ -326,7 +326,7 @@ const AItoolsPage = () => {
       {/* כפתורי יצירת קשר */}
       <div className="fixed bottom-6 left-6 flex flex-col space-y-4 z-50">
         <ContactButton 
-          href="https://chat.whatsapp.com/F4eKksEsU4n1LKVSwiXo82"
+          href="https://chat.whatsapp.com/HotN7h2MgFz47RYr3pNdR9?mode=ac_c"
           icon={<FaWhatsapp size={24} />}
           description="הצטרף לקבוצת הוואטסאפ השקטה"
           bgColor="bg-green-500"
