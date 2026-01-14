@@ -251,46 +251,46 @@ const AItoolsPage = () => {
   return (
     <div className="min-h-screen bg-white p-4 sm:p-6 md:p-8" dir="rtl">
 
-      <header className="relative text-center mb-16 sm:mb-20 z-10 px-4 py-12 sm:py-16">
+      <header className="relative text-center mb-10 sm:mb-12 z-10 px-4 py-8 sm:py-10">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <img 
             src="https://res.cloudinary.com/dsoh3yteb/image/upload/v1742806446/Logo2025_xbrzm3.png"
             alt="KA Logo"
-            className="h-24 sm:h-32 md:h-40 lg:h-48 mx-auto mb-8 sm:mb-10"
+            className="h-20 sm:h-24 md:h-32 mx-auto mb-6"
           />
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-gray-900 mb-4 tracking-wide">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-light text-gray-900 mb-3 tracking-wide">
             כלי <span className="font-normal" style={{color: '#D4AF37'}}>AI</span> מובילים
           </h1>
-          <p className="text-lg sm:text-xl text-gray-500 mb-6 max-w-2xl mx-auto font-light tracking-wide">
+          <p className="text-base sm:text-lg text-gray-500 mb-4 max-w-2xl mx-auto font-light tracking-wide">
             מדריך מקצועי לכלים המובילים בתחום הבינה המלאכותית
           </p>
-          <div className="w-12 h-[1px] mx-auto mb-4" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
-          <p className="text-xs text-gray-400 tracking-widest uppercase">
+          <div className="w-10 h-[1px] mx-auto mb-3" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
+          <p className="text-xs text-gray-400 tracking-wider">
             עדכון אחרון · 14.1.26
           </p>
         </motion.div>
       </header>
 
-      <div className="container mx-auto relative z-10 max-w-7xl px-4 sm:px-6 md:px-8 py-8 border border-[#D4AF37]/20" style={{borderRadius: '32px 32px 0 32px'}}>
+      <div className="container mx-auto relative z-10 max-w-6xl px-4 sm:px-6 py-6 border border-[#D4AF37]/20" style={{borderRadius: '24px 24px 0 24px'}}>
         {/* חיפוש וסינון */}
         <motion.div 
-          className="mb-12 sm:mb-16 md:mb-20 max-w-4xl mx-auto"
+          className="mb-8 sm:mb-10 max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
         >
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-3">
             {/* שורה ראשונה - חיפוש */}
             <div className="w-full">
               <div className="relative">
                 <input 
                   type="text" 
                   placeholder="חיפוש..." 
-                  className="w-full p-4 sm:p-5 pr-4 border-b-2 border-gray-200 focus:outline-none focus:border-[#D4AF37] transition-all duration-300 text-base sm:text-lg bg-transparent placeholder-gray-300 font-light tracking-wide"
+                  className="w-full p-3 sm:p-3.5 pr-4 border-b border-gray-200 focus:outline-none focus:border-[#D4AF37] transition-all duration-300 text-sm bg-transparent placeholder-gray-300 font-light tracking-wide"
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
                   style={{borderRadius: 0}}
@@ -298,7 +298,7 @@ const AItoolsPage = () => {
                 {searchTerm && (
                   <button 
                     onClick={() => setSearchTerm('')}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 hover:text-[#D4AF37] transition-colors text-sm"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300 hover:text-[#D4AF37] transition-colors text-xs"
                   >
                     ✕
                   </button>
@@ -307,9 +307,9 @@ const AItoolsPage = () => {
             </div>
             
             {/* שורה שנייה - סינונים */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <select 
-                className="p-4 border-b border-gray-200 focus:outline-none focus:border-[#D4AF37] transition-all duration-300 text-sm bg-transparent cursor-pointer font-light tracking-wide text-gray-600"
+                className="p-3 border-b border-gray-200 focus:outline-none focus:border-[#D4AF37] transition-all duration-300 text-xs bg-transparent cursor-pointer font-light tracking-wide text-gray-600"
                 value={difficultyFilter}
                 onChange={e => setDifficultyFilter(e.target.value)}
                 style={{borderRadius: 0}}
@@ -320,7 +320,7 @@ const AItoolsPage = () => {
                 <option value="מתקדמים">מתקדמים</option>
               </select>
               <select 
-                className="p-4 border-b border-gray-200 focus:outline-none focus:border-[#D4AF37] transition-all duration-300 text-sm bg-transparent cursor-pointer font-light tracking-wide text-gray-600"
+                className="p-3 border-b border-gray-200 focus:outline-none focus:border-[#D4AF37] transition-all duration-300 text-xs bg-transparent cursor-pointer font-light tracking-wide text-gray-600"
                 value={priceFilter}
                 onChange={e => setPriceFilter(e.target.value)}
                 style={{borderRadius: 0}}
@@ -330,7 +330,7 @@ const AItoolsPage = () => {
                 <option value="בתשלום">בתשלום</option>
               </select>
               <select 
-                className="p-4 border-b border-gray-200 focus:outline-none focus:border-[#D4AF37] transition-all duration-300 text-sm bg-transparent cursor-pointer font-light tracking-wide text-gray-600"
+                className="p-3 border-b border-gray-200 focus:outline-none focus:border-[#D4AF37] transition-all duration-300 text-xs bg-transparent cursor-pointer font-light tracking-wide text-gray-600"
                 value={categoryFilter}
                 onChange={e => setCategoryFilter(e.target.value)}
                 style={{borderRadius: 0}}
@@ -343,53 +343,53 @@ const AItoolsPage = () => {
             </div>
             
             {/* תוצאות */}
-            <div className="text-center text-xs text-gray-400 pt-4 tracking-widest uppercase">
+            <div className="text-center text-xs text-gray-400 pt-2 tracking-wider">
               {filteredTools.length} כלים
             </div>
           </div>
         </motion.div>
 
         {/* כרטיסי הכלים */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 max-w-7xl mx-auto">
           {filteredTools.map((tool, index) => (
             <motion.div 
               key={index}
-              className="group relative bg-white p-8 sm:p-10 border-2 border-gray-200 hover:border-[#D4AF37] transition-all duration-500 hover:shadow-[0_12px_40px_rgb(212,175,55,0.15)]"
-              initial={{ opacity: 0, y: 30 }}
+              className="group relative bg-white p-5 sm:p-6 border border-gray-200 hover:border-[#D4AF37] transition-all duration-400 hover:shadow-[0_8px_24px_rgb(212,175,55,0.12)]"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: Math.min(index * 0.05, 0.6), duration: 0.6, ease: "easeOut" }}
-              style={{borderRadius: '24px 24px 0 24px'}}
+              transition={{ delay: Math.min(index * 0.03, 0.4), duration: 0.4, ease: "easeOut" }}
+              style={{borderRadius: '16px 16px 0 16px'}}
             >
               {/* קו זהב עליון - מופיע בהובר */}
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-[#D4AF37] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-right" style={{borderRadius: '24px 24px 0 0'}}></div>
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-[#D4AF37] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-right" style={{borderRadius: '16px 16px 0 0'}}></div>
               
               <div className="relative">
                 {/* כותרת */}
-                <h2 className="text-2xl sm:text-3xl font-light text-gray-900 mb-6 tracking-wide">
+                <h2 className="text-lg sm:text-xl font-light text-gray-900 mb-3 tracking-wide">
                   {tool.name}
                 </h2>
                 
                 {/* תגיות מידע */}
-                <div className="flex flex-wrap gap-3 mb-6 pb-6 border-b border-gray-100">
-                  <span className="text-xs font-light text-gray-500 tracking-wider uppercase">
+                <div className="flex flex-wrap gap-2 mb-3 pb-3 border-b border-gray-100">
+                  <span className="text-xs font-light text-gray-500 tracking-wide">
                     {tool.difficulty}
                   </span>
                   <span className="text-gray-300">·</span>
-                  <span className="text-xs font-light text-gray-500 tracking-wider uppercase">
+                  <span className="text-xs font-light text-gray-500 tracking-wide">
                     {tool.price}
                   </span>
                 </div>
                 
                 {/* פרטים */}
-                <div className="space-y-5 mb-8">
+                <div className="space-y-3 mb-5">
                   <div>
-                    <p className="text-xs font-light text-gray-400 mb-2 tracking-widest uppercase">קטגוריה</p>
-                    <p className="text-sm text-gray-600 leading-relaxed font-light">{tool.category}</p>
+                    <p className="text-xs font-light text-gray-400 mb-1 tracking-wider uppercase">קטגוריה</p>
+                    <p className="text-xs text-gray-600 leading-relaxed font-light">{tool.category}</p>
                   </div>
                   {tool.usage && (
                     <div>
-                      <p className="text-xs font-light text-gray-400 mb-2 tracking-widest uppercase">תיאור</p>
-                      <p className="text-sm text-gray-600 leading-relaxed font-light line-clamp-4">{tool.usage}</p>
+                      <p className="text-xs font-light text-gray-400 mb-1 tracking-wider uppercase">תיאור</p>
+                      <p className="text-xs text-gray-600 leading-relaxed font-light line-clamp-3">{tool.usage}</p>
                     </div>
                   )}
                 </div>
@@ -397,12 +397,12 @@ const AItoolsPage = () => {
                 {/* כפתור CTA */}
                 <a 
                   href={tool.link} 
-                  className="inline-block px-10 py-3.5 border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-light text-sm tracking-widest uppercase transition-all duration-300"
+                  className="inline-block px-6 py-2 border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-light text-xs tracking-wider uppercase transition-all duration-300"
                   target="_blank"
                   rel="noreferrer"
-                  style={{borderRadius: '12px 12px 0 12px'}}
+                  style={{borderRadius: '8px 8px 0 8px'}}
                 >
-                  כניסה לכלי
+                  כניסה
                 </a>
               </div>
             </motion.div>
@@ -411,15 +411,15 @@ const AItoolsPage = () => {
 
         {filteredTools.length === 0 && (
           <motion.div 
-            className="text-center mt-20 p-16 border-2 border-gray-200"
+            className="text-center mt-12 p-10 border border-gray-200"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{borderRadius: '24px 24px 0 24px'}}
+            transition={{ duration: 0.4 }}
+            style={{borderRadius: '16px 16px 0 16px'}}
           >
-            <div className="w-12 h-[2px] mx-auto mb-6" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
-            <p className="text-lg font-light text-gray-600 mb-2 tracking-wide">לא נמצאו תוצאות</p>
-            <p className="text-sm text-gray-400 mb-8 font-light">נסה לשנות את פרמטרי החיפוש</p>
+            <div className="w-10 h-[1px] mx-auto mb-4" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
+            <p className="text-base font-light text-gray-600 mb-2 tracking-wide">לא נמצאו תוצאות</p>
+            <p className="text-sm text-gray-400 mb-6 font-light">נסה לשנות את פרמטרי החיפוש</p>
             <button 
               onClick={() => {
                 setSearchTerm('');
@@ -427,8 +427,8 @@ const AItoolsPage = () => {
                 setPriceFilter('');
                 setCategoryFilter('');
               }}
-              className="px-10 py-3.5 border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-light text-xs tracking-widest uppercase transition-all duration-300"
-              style={{borderRadius: '12px 12px 0 12px'}}
+              className="px-6 py-2 border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-light text-xs tracking-wider uppercase transition-all duration-300"
+              style={{borderRadius: '8px 8px 0 8px'}}
             >
               נקה סינונים
             </button>
@@ -437,16 +437,16 @@ const AItoolsPage = () => {
       </div>
 
       {/* פוטר */}
-      <footer className="mt-24 sm:mt-32 md:mt-40 py-12 text-center border-t border-[#D4AF37]/20">
+      <footer className="mt-16 sm:mt-20 py-8 text-center border-t border-[#D4AF37]/20">
         <div className="max-w-4xl mx-auto px-4">
-          <div className="w-12 h-[1px] mx-auto mb-8" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
+          <div className="w-10 h-[1px] mx-auto mb-6" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
           
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 mb-6">
-            <button className="text-gray-400 hover:text-[#D4AF37] transition-colors duration-300 text-xs font-light tracking-widest uppercase">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-6 mb-4">
+            <button className="text-gray-400 hover:text-[#D4AF37] transition-colors duration-300 text-xs font-light tracking-wider">
               תנאי שימוש
             </button>
             <span className="hidden sm:inline text-gray-300">·</span>
-            <button className="text-gray-400 hover:text-[#D4AF37] transition-colors duration-300 text-xs font-light tracking-widest uppercase">
+            <button className="text-gray-400 hover:text-[#D4AF37] transition-colors duration-300 text-xs font-light tracking-wider">
               מדיניות פרטיות
             </button>
           </div>
