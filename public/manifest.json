@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "כלי AI",
+  "name": "כלי AI מובילים - מדריך מקצועי",
+  "description": "מדריך מקצועי לכלי הבינה המלאכותית המובילים בעולם",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,9 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#D4AF37",
+  "background_color": "#ffffff",
+  "dir": "rtl",
+  "lang": "he",
+  "orientation": "any"
 }
