@@ -199,8 +199,8 @@ const ContactButton = ({ href, icon, description, bgColor }) => {
     >
       <a 
         href={isTouchDevice && !isDescriptionVisible ? '#' : href} 
-        className={`${bgColor} text-white p-3 rounded-lg shadow-md flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200`}
-        style={{ width: '48px', height: '48px' }}
+        className={`${bgColor} p-3.5 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md`}
+        style={{ width: '52px', height: '52px', borderRadius: 0 }}
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => {
@@ -214,12 +214,13 @@ const ContactButton = ({ href, icon, description, bgColor }) => {
       </a>
       {isDescriptionVisible && (
         <motion.div 
-          className="absolute left-14 top-1/2 -translate-y-1/2 bg-gray-900 text-white px-3 py-2 rounded-lg shadow-lg whitespace-nowrap z-50"
+          className="absolute left-16 top-1/2 -translate-y-1/2 bg-white border border-gray-200 text-gray-700 px-4 py-2.5 shadow-lg whitespace-nowrap z-50"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.3 }}
+          style={{borderRadius: 0}}
         >
-          <div className="text-xs">{description}</div>
+          <div className="text-xs font-light tracking-wide">{description}</div>
         </motion.div>
       )}
     </div>
@@ -248,54 +249,56 @@ const AItoolsPage = () => {
   }, [searchTerm, difficultyFilter, priceFilter, categoryFilter]);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 md:p-8" dir="rtl">
+    <div className="min-h-screen bg-white p-4 sm:p-6 md:p-8" dir="rtl">
 
-      <header className="relative text-center mb-10 sm:mb-14 z-10 px-4 bg-white py-8 sm:py-12 rounded-xl shadow-sm border border-gray-200">
+      <header className="relative text-center mb-16 sm:mb-20 z-10 px-4 py-12 sm:py-16 border-b border-[#D4AF37]/20">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <img 
             src="https://res.cloudinary.com/dsoh3yteb/image/upload/v1742806446/Logo2025_xbrzm3.png"
             alt="KA Logo"
-            className="h-20 sm:h-28 md:h-36 lg:h-40 mx-auto mb-6 sm:mb-8"
+            className="h-24 sm:h-32 md:h-40 lg:h-48 mx-auto mb-8 sm:mb-10"
           />
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 tracking-tight">
-            כלי <span className="text-amber-600">AI</span> מובילים
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-gray-900 mb-4 tracking-wide">
+            כלי <span className="font-normal" style={{color: '#D4AF37'}}>AI</span> מובילים
           </h1>
-          <p className="text-base sm:text-lg text-gray-600 mb-4 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-500 mb-6 max-w-2xl mx-auto font-light tracking-wide">
             מדריך מקצועי לכלים המובילים בתחום הבינה המלאכותית
           </p>
-          <div className="inline-flex items-center gap-2 text-xs text-gray-500">
-            <span>עדכון אחרון: 14.1.26</span>
-          </div>
+          <div className="w-12 h-[1px] mx-auto mb-4" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
+          <p className="text-xs text-gray-400 tracking-widest uppercase">
+            עדכון אחרון · 14.1.26
+          </p>
         </motion.div>
       </header>
 
       <div className="container mx-auto relative z-10 max-w-7xl px-2 sm:px-4">
         {/* חיפוש וסינון */}
         <motion.div 
-          className="mb-8 sm:mb-10 md:mb-12 p-6 sm:p-8 bg-white rounded-xl shadow-sm border border-gray-200"
+          className="mb-12 sm:mb-16 md:mb-20 max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.4 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
         >
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-5">
             {/* שורה ראשונה - חיפוש */}
             <div className="w-full">
               <div className="relative">
                 <input 
                   type="text" 
-                  placeholder="חיפוש כלי..." 
-                  className="w-full p-3.5 sm:p-4 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 transition-all duration-200 text-base bg-white placeholder-gray-400"
+                  placeholder="חיפוש..." 
+                  className="w-full p-4 sm:p-5 pr-4 border-b-2 border-gray-200 focus:outline-none focus:border-[#D4AF37] transition-all duration-300 text-base sm:text-lg bg-transparent placeholder-gray-300 font-light tracking-wide"
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
+                  style={{borderRadius: 0}}
                 />
                 {searchTerm && (
                   <button 
                     onClick={() => setSearchTerm('')}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors text-sm"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 hover:text-[#D4AF37] transition-colors text-sm"
                   >
                     ✕
                   </button>
@@ -304,11 +307,12 @@ const AItoolsPage = () => {
             </div>
             
             {/* שורה שנייה - סינונים */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <select 
-                className="p-3.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 transition-all duration-200 text-sm bg-white cursor-pointer hover:border-gray-400"
+                className="p-4 border-b border-gray-200 focus:outline-none focus:border-[#D4AF37] transition-all duration-300 text-sm bg-transparent cursor-pointer font-light tracking-wide text-gray-600"
                 value={difficultyFilter}
                 onChange={e => setDifficultyFilter(e.target.value)}
+                style={{borderRadius: 0}}
               >
                 <option value="">רמת קושי</option>
                 <option value="מתחילים">מתחילים</option>
@@ -316,18 +320,20 @@ const AItoolsPage = () => {
                 <option value="מתקדמים">מתקדמים</option>
               </select>
               <select 
-                className="p-3.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 transition-all duration-200 text-sm bg-white cursor-pointer hover:border-gray-400"
+                className="p-4 border-b border-gray-200 focus:outline-none focus:border-[#D4AF37] transition-all duration-300 text-sm bg-transparent cursor-pointer font-light tracking-wide text-gray-600"
                 value={priceFilter}
                 onChange={e => setPriceFilter(e.target.value)}
+                style={{borderRadius: 0}}
               >
                 <option value="">מחיר</option>
                 <option value="חינם">חינם</option>
                 <option value="בתשלום">בתשלום</option>
               </select>
               <select 
-                className="p-3.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 transition-all duration-200 text-sm bg-white cursor-pointer hover:border-gray-400"
+                className="p-4 border-b border-gray-200 focus:outline-none focus:border-[#D4AF37] transition-all duration-300 text-sm bg-transparent cursor-pointer font-light tracking-wide text-gray-600"
                 value={categoryFilter}
                 onChange={e => setCategoryFilter(e.target.value)}
+                style={{borderRadius: 0}}
               >
                 <option value="">קטגוריה</option>
                 {categories.map((category, index) => (
@@ -337,48 +343,53 @@ const AItoolsPage = () => {
             </div>
             
             {/* תוצאות */}
-            <div className="text-center text-xs text-gray-500 pt-3 border-t border-gray-100">
-              מציג <span className="font-semibold text-gray-700">{filteredTools.length}</span> כלים
+            <div className="text-center text-xs text-gray-400 pt-4 tracking-widest uppercase">
+              {filteredTools.length} כלים
             </div>
           </div>
         </motion.div>
 
         {/* כרטיסי הכלים */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 max-w-7xl mx-auto">
           {filteredTools.map((tool, index) => (
             <motion.div 
               key={index}
-              className="group relative bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:border-amber-500 hover:shadow-md transition-all duration-200"
-              initial={{ opacity: 0, y: 20 }}
+              className="group relative bg-white p-8 border border-gray-100 hover:border-[#D4AF37] transition-all duration-500 hover:shadow-[0_8px_30px_rgb(212,175,55,0.12)]"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: Math.min(index * 0.02, 0.4), duration: 0.3 }}
+              transition={{ delay: Math.min(index * 0.05, 0.6), duration: 0.6, ease: "easeOut" }}
+              style={{borderRadius: 0}}
             >
+              {/* קו זהב עליון - מופיע בהובר */}
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-[#D4AF37] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-right"></div>
+              
               <div className="relative">
                 {/* כותרת */}
-                <h2 className="text-xl font-semibold text-gray-900 mb-3">
+                <h2 className="text-2xl font-light text-gray-900 mb-6 tracking-wide">
                   {tool.name}
                 </h2>
                 
                 {/* תגיות מידע */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200">
+                <div className="flex flex-wrap gap-3 mb-6">
+                  <span className="text-xs font-light text-gray-500 tracking-wider uppercase">
                     {tool.difficulty}
                   </span>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200">
+                  <span className="text-gray-300">·</span>
+                  <span className="text-xs font-light text-gray-500 tracking-wider uppercase">
                     {tool.price}
                   </span>
                 </div>
                 
                 {/* פרטים */}
-                <div className="space-y-3 mb-5">
+                <div className="space-y-4 mb-8">
                   <div>
-                    <p className="text-xs font-medium text-gray-500 mb-1">קטגוריה</p>
-                    <p className="text-sm text-gray-700 leading-relaxed">{tool.category}</p>
+                    <p className="text-xs font-light text-gray-400 mb-2 tracking-widest uppercase">קטגוריה</p>
+                    <p className="text-sm text-gray-600 leading-relaxed font-light">{tool.category}</p>
                   </div>
                   {tool.usage && (
                     <div>
-                      <p className="text-xs font-medium text-gray-500 mb-1">תיאור</p>
-                      <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">{tool.usage}</p>
+                      <p className="text-xs font-light text-gray-400 mb-2 tracking-widest uppercase">תיאור</p>
+                      <p className="text-sm text-gray-600 leading-relaxed font-light line-clamp-3">{tool.usage}</p>
                     </div>
                   )}
                 </div>
@@ -386,11 +397,12 @@ const AItoolsPage = () => {
                 {/* כפתור CTA */}
                 <a 
                   href={tool.link} 
-                  className="block w-full py-2.5 px-4 bg-amber-600 hover:bg-amber-700 text-white font-medium text-center text-sm rounded-lg transition-colors duration-200"
+                  className="inline-block px-8 py-3 border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-light text-sm tracking-widest uppercase transition-all duration-300"
                   target="_blank"
                   rel="noreferrer"
+                  style={{borderRadius: 0}}
                 >
-                  עבור לכלי
+                  כניסה
                 </a>
               </div>
             </motion.div>
@@ -399,13 +411,15 @@ const AItoolsPage = () => {
 
         {filteredTools.length === 0 && (
           <motion.div 
-            className="text-center text-gray-500 mt-12 p-10 sm:p-12 bg-white rounded-lg shadow-sm border border-gray-200"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
+            className="text-center mt-20 p-16 border border-gray-100"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{borderRadius: 0}}
           >
-            <p className="text-xl font-semibold text-gray-700 mb-2">לא נמצאו תוצאות</p>
-            <p className="text-base text-gray-500 mb-6">נסה לשנות את פרמטרי החיפוש</p>
+            <div className="w-12 h-[1px] mx-auto mb-6" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
+            <p className="text-lg font-light text-gray-600 mb-2 tracking-wide">לא נמצאו תוצאות</p>
+            <p className="text-sm text-gray-400 mb-8 font-light">נסה לשנות את פרמטרי החיפוש</p>
             <button 
               onClick={() => {
                 setSearchTerm('');
@@ -413,7 +427,8 @@ const AItoolsPage = () => {
                 setPriceFilter('');
                 setCategoryFilter('');
               }}
-              className="px-6 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors duration-200"
+              className="px-8 py-3 border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-light text-xs tracking-widest uppercase transition-all duration-300"
+              style={{borderRadius: 0}}
             >
               נקה סינונים
             </button>
@@ -422,17 +437,18 @@ const AItoolsPage = () => {
       </div>
 
       {/* פוטר */}
-      <footer className="mt-16 sm:mt-20 md:mt-24 py-8 text-center border-t border-gray-200 bg-white">
+      <footer className="mt-24 sm:mt-32 md:mt-40 py-12 text-center border-t border-[#D4AF37]/20">
         <div className="max-w-4xl mx-auto px-4">
-          <p className="text-gray-600 mb-4 text-sm">
+          <div className="w-12 h-[1px] mx-auto mb-6" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
+          <p className="text-gray-500 mb-6 text-sm font-light tracking-wider">
             יובל אבידני
           </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-6">
-            <button className="text-gray-500 hover:text-gray-700 transition-colors duration-200 text-sm">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8">
+            <button className="text-gray-400 hover:text-[#D4AF37] transition-colors duration-300 text-xs font-light tracking-widest uppercase">
               תנאי שימוש
             </button>
-            <span className="hidden sm:inline text-gray-300">•</span>
-            <button className="text-gray-500 hover:text-gray-700 transition-colors duration-200 text-sm">
+            <span className="hidden sm:inline text-gray-300">·</span>
+            <button className="text-gray-400 hover:text-[#D4AF37] transition-colors duration-300 text-xs font-light tracking-widest uppercase">
               מדיניות פרטיות
             </button>
           </div>
@@ -440,30 +456,30 @@ const AItoolsPage = () => {
       </footer>
 
       {/* כפתורי יצירת קשר */}
-      <div className="fixed bottom-4 sm:bottom-6 left-3 sm:left-6 flex flex-col gap-3 z-50">
+      <div className="fixed bottom-6 sm:bottom-8 left-6 sm:left-8 flex flex-col gap-4 z-50">
         <ContactButton 
           href="https://chat.whatsapp.com/HotN7h2MgFz47RYr3pNdR9?mode=ac_c"
-          icon={<FaWhatsapp size={20} />}
+          icon={<FaWhatsapp size={18} />}
           description="הצטרף לקבוצת הוואטסאפ השקטה"
-          bgColor="bg-green-600 hover:bg-green-700"
+          bgColor="bg-white hover:bg-[#D4AF37] border border-gray-200 hover:border-[#D4AF37] text-gray-700 hover:text-white"
         />
         <ContactButton 
           href="https://wa.me/972529772209?text=היי%20אני%20אשמח%20לשמוע%20עוד%20על%20ההרצאות%20והסדנאות%20שלכם"
-          icon={<FaWhatsapp size={20} />}
+          icon={<FaWhatsapp size={18} />}
           description="שלח הודעת וואטסאפ אישית"
-          bgColor="bg-amber-600 hover:bg-amber-700"
+          bgColor="bg-white hover:bg-[#D4AF37] border border-gray-200 hover:border-[#D4AF37] text-gray-700 hover:text-white"
         />
         <ContactButton 
           href="mailto:kochavith.arnon@gmail.com"
-          icon={<MdEmail size={20} />}
+          icon={<MdEmail size={18} />}
           description="שלח אימייל"
-          bgColor="bg-blue-600 hover:bg-blue-700"
+          bgColor="bg-white hover:bg-[#D4AF37] border border-gray-200 hover:border-[#D4AF37] text-gray-700 hover:text-white"
         />
         <ContactButton 
           href="tel:+972529772209"
-          icon={<FaPhone size={20} />}
+          icon={<FaPhone size={18} />}
           description="התקשר אלינו"
-          bgColor="bg-gray-700 hover:bg-gray-800"
+          bgColor="bg-white hover:bg-[#D4AF37] border border-gray-200 hover:border-[#D4AF37] text-gray-700 hover:text-white"
         />
       </div>
     </div>
