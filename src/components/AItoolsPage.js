@@ -437,19 +437,9 @@ const AItoolsPage = () => {
       </div>
 
       {/* פוטר */}
-      <footer className="mt-24 sm:mt-32 md:mt-40 py-16 text-center border-t-2 border-[#D4AF37]/30">
+      <footer className="mt-24 sm:mt-32 md:mt-40 py-12 text-center border-t border-[#D4AF37]/20">
         <div className="max-w-4xl mx-auto px-4">
-          <div className="w-16 h-[2px] mx-auto mb-8" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
-          
-          {/* יובל אבידני */}
-          <div className="mb-8">
-            <p className="text-2xl font-light text-gray-700 mb-2 tracking-wide" style={{color: '#D4AF37'}}>
-              יובל אבידני
-            </p>
-            <p className="text-xs text-gray-400 tracking-widest uppercase">
-              מומחה בינה מלאכותית
-            </p>
-          </div>
+          <div className="w-12 h-[1px] mx-auto mb-8" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
           
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 mb-6">
             <button className="text-gray-400 hover:text-[#D4AF37] transition-colors duration-300 text-xs font-light tracking-widest uppercase">
