@@ -200,7 +200,7 @@ const ContactButton = ({ href, icon, description, bgColor }) => {
       <a 
         href={isTouchDevice && !isDescriptionVisible ? '#' : href} 
         className={`${bgColor} p-3.5 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md`}
-        style={{ width: '52px', height: '52px', borderRadius: 0 }}
+        style={{ width: '52px', height: '52px', borderRadius: '12px 12px 0 12px' }}
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => {
@@ -214,11 +214,11 @@ const ContactButton = ({ href, icon, description, bgColor }) => {
       </a>
       {isDescriptionVisible && (
         <motion.div 
-          className="absolute left-16 top-1/2 -translate-y-1/2 bg-white border border-gray-200 text-gray-700 px-4 py-2.5 shadow-lg whitespace-nowrap z-50"
+          className="absolute left-16 top-1/2 -translate-y-1/2 bg-white border-2 border-[#D4AF37] text-gray-700 px-4 py-2.5 shadow-lg whitespace-nowrap z-50"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3 }}
-          style={{borderRadius: 0}}
+          style={{borderRadius: '8px 8px 0 8px'}}
         >
           <div className="text-xs font-light tracking-wide">{description}</div>
         </motion.div>
@@ -251,7 +251,7 @@ const AItoolsPage = () => {
   return (
     <div className="min-h-screen bg-white p-4 sm:p-6 md:p-8" dir="rtl">
 
-      <header className="relative text-center mb-16 sm:mb-20 z-10 px-4 py-12 sm:py-16 border-b border-[#D4AF37]/20">
+      <header className="relative text-center mb-16 sm:mb-20 z-10 px-4 py-12 sm:py-16">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -275,7 +275,7 @@ const AItoolsPage = () => {
         </motion.div>
       </header>
 
-      <div className="container mx-auto relative z-10 max-w-7xl px-2 sm:px-4">
+      <div className="container mx-auto relative z-10 max-w-7xl px-4 sm:px-6 md:px-8 py-8 border border-[#D4AF37]/20" style={{borderRadius: '32px 32px 0 32px'}}>
         {/* חיפוש וסינון */}
         <motion.div 
           className="mb-12 sm:mb-16 md:mb-20 max-w-4xl mx-auto"
@@ -350,27 +350,27 @@ const AItoolsPage = () => {
         </motion.div>
 
         {/* כרטיסי הכלים */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-7xl mx-auto">
           {filteredTools.map((tool, index) => (
             <motion.div 
               key={index}
-              className="group relative bg-white p-8 border border-gray-100 hover:border-[#D4AF37] transition-all duration-500 hover:shadow-[0_8px_30px_rgb(212,175,55,0.12)]"
+              className="group relative bg-white p-8 sm:p-10 border-2 border-gray-200 hover:border-[#D4AF37] transition-all duration-500 hover:shadow-[0_12px_40px_rgb(212,175,55,0.15)]"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: Math.min(index * 0.05, 0.6), duration: 0.6, ease: "easeOut" }}
-              style={{borderRadius: 0}}
+              style={{borderRadius: '24px 24px 0 24px'}}
             >
               {/* קו זהב עליון - מופיע בהובר */}
-              <div className="absolute top-0 left-0 w-full h-[1px] bg-[#D4AF37] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-right"></div>
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-[#D4AF37] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-right" style={{borderRadius: '24px 24px 0 0'}}></div>
               
               <div className="relative">
                 {/* כותרת */}
-                <h2 className="text-2xl font-light text-gray-900 mb-6 tracking-wide">
+                <h2 className="text-2xl sm:text-3xl font-light text-gray-900 mb-6 tracking-wide">
                   {tool.name}
                 </h2>
                 
                 {/* תגיות מידע */}
-                <div className="flex flex-wrap gap-3 mb-6">
+                <div className="flex flex-wrap gap-3 mb-6 pb-6 border-b border-gray-100">
                   <span className="text-xs font-light text-gray-500 tracking-wider uppercase">
                     {tool.difficulty}
                   </span>
@@ -381,7 +381,7 @@ const AItoolsPage = () => {
                 </div>
                 
                 {/* פרטים */}
-                <div className="space-y-4 mb-8">
+                <div className="space-y-5 mb-8">
                   <div>
                     <p className="text-xs font-light text-gray-400 mb-2 tracking-widest uppercase">קטגוריה</p>
                     <p className="text-sm text-gray-600 leading-relaxed font-light">{tool.category}</p>
@@ -389,7 +389,7 @@ const AItoolsPage = () => {
                   {tool.usage && (
                     <div>
                       <p className="text-xs font-light text-gray-400 mb-2 tracking-widest uppercase">תיאור</p>
-                      <p className="text-sm text-gray-600 leading-relaxed font-light line-clamp-3">{tool.usage}</p>
+                      <p className="text-sm text-gray-600 leading-relaxed font-light line-clamp-4">{tool.usage}</p>
                     </div>
                   )}
                 </div>
@@ -397,12 +397,12 @@ const AItoolsPage = () => {
                 {/* כפתור CTA */}
                 <a 
                   href={tool.link} 
-                  className="inline-block px-8 py-3 border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-light text-sm tracking-widest uppercase transition-all duration-300"
+                  className="inline-block px-10 py-3.5 border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-light text-sm tracking-widest uppercase transition-all duration-300"
                   target="_blank"
                   rel="noreferrer"
-                  style={{borderRadius: 0}}
+                  style={{borderRadius: '12px 12px 0 12px'}}
                 >
-                  כניסה
+                  כניסה לכלי
                 </a>
               </div>
             </motion.div>
@@ -411,13 +411,13 @@ const AItoolsPage = () => {
 
         {filteredTools.length === 0 && (
           <motion.div 
-            className="text-center mt-20 p-16 border border-gray-100"
+            className="text-center mt-20 p-16 border-2 border-gray-200"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            style={{borderRadius: 0}}
+            style={{borderRadius: '24px 24px 0 24px'}}
           >
-            <div className="w-12 h-[1px] mx-auto mb-6" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
+            <div className="w-12 h-[2px] mx-auto mb-6" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
             <p className="text-lg font-light text-gray-600 mb-2 tracking-wide">לא נמצאו תוצאות</p>
             <p className="text-sm text-gray-400 mb-8 font-light">נסה לשנות את פרמטרי החיפוש</p>
             <button 
@@ -427,8 +427,8 @@ const AItoolsPage = () => {
                 setPriceFilter('');
                 setCategoryFilter('');
               }}
-              className="px-8 py-3 border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-light text-xs tracking-widest uppercase transition-all duration-300"
-              style={{borderRadius: 0}}
+              className="px-10 py-3.5 border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-light text-xs tracking-widest uppercase transition-all duration-300"
+              style={{borderRadius: '12px 12px 0 12px'}}
             >
               נקה סינונים
             </button>
@@ -437,13 +437,21 @@ const AItoolsPage = () => {
       </div>
 
       {/* פוטר */}
-      <footer className="mt-24 sm:mt-32 md:mt-40 py-12 text-center border-t border-[#D4AF37]/20">
+      <footer className="mt-24 sm:mt-32 md:mt-40 py-16 text-center border-t-2 border-[#D4AF37]/30">
         <div className="max-w-4xl mx-auto px-4">
-          <div className="w-12 h-[1px] mx-auto mb-6" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
-          <p className="text-gray-500 mb-6 text-sm font-light tracking-wider">
-            יובל אבידני
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8">
+          <div className="w-16 h-[2px] mx-auto mb-8" style={{background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)'}}></div>
+          
+          {/* יובל אבידני */}
+          <div className="mb-8">
+            <p className="text-2xl font-light text-gray-700 mb-2 tracking-wide" style={{color: '#D4AF37'}}>
+              יובל אבידני
+            </p>
+            <p className="text-xs text-gray-400 tracking-widest uppercase">
+              מומחה בינה מלאכותית
+            </p>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 mb-6">
             <button className="text-gray-400 hover:text-[#D4AF37] transition-colors duration-300 text-xs font-light tracking-widest uppercase">
               תנאי שימוש
             </button>
@@ -452,6 +460,10 @@ const AItoolsPage = () => {
               מדיניות פרטיות
             </button>
           </div>
+          
+          <p className="text-xs text-gray-400 tracking-wide">
+            © 2026 כל הזכויות שמורות
+          </p>
         </div>
       </footer>
 
